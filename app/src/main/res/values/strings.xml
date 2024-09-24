@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Personal Trainer</string>
+
+    <string name="str_btnModuloCliente">Cliente</string>
+    <string name="str_btnModuloCatalogo">Catalogo</string>
+    <string name="str_btnModuloRutina">Rutina</string>
+
+    <string name="str_btnAgregarObjetivo">Agregar objetivo</string>
+    <string name="str_listarObjetivo">lista objetivo</string>
+    <string name="str_btnActualizarObjetivo">Actualizar </string>
+    <string name="str_btnEliminarObjetivo">Eliminar</string>"
+</resources>

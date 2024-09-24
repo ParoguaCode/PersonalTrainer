@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.Objetivo.AgregarObjetivoActivity"
+    android:orientation="vertical">
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="57dp"
+      android:layout_gravity="center_horizontal"
+      android:gravity="center"
+      android:paddingTop="10sp"
+      android:paddingBottom="10sp"
+      android:text="Gestionar Objetivo"
+      android:textColor="@color/Primario"
+      android:textSize="24sp"
+      android:textStyle="bold">
+
+  </TextView>
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="20dp"
+      android:text="Nombre"/>
+
+  <EditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/txtNombre"
+      android:hint="insertar nombre"
+      android:inputType="text"
+      />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:paddingBottom="10sp"
+    android:paddingTop="20dp"
+  >
+  <Button
+      android:id="@+id/btnGuadarObjetivo"
+      android:layout_width="100dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:backgroundTint="#2F5D9C"
+      android:onClick="onClick"
+      android:text="Guardar" />
+  <Button
+      android:id="@+id/btnActualizarObjetivo"
+      android:layout_width="120dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:backgroundTint="#2F5D9C"
+      android:onClick="onClick"
+      android:layout_marginHorizontal="10sp"
+      android:text="@string/str_btnActualizarObjetivo" />
+  <Button
+      android:id="@+id/btnEliminarObjetivo"
+      android:layout_width="100dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:backgroundTint="#2F5D9C"
+      android:onClick="onClick"
+      android:text="@string/str_btnEliminarObjetivo" />
+</LinearLayout>
+
+</LinearLayout>

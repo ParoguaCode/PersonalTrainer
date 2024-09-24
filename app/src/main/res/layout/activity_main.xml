@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:paddingTop="20dp"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/trainer"
+        android:paddingTop="30dp"
+
+        />
+
+
+    <Button
+        android:id="@+id/btnModuloCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:backgroundTint="#2F5D9C"
+        android:text="@string/str_btnModuloCliente"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btnModuloCatalogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:backgroundTint="#2F5D9C"
+        android:onClick="onClick"
+        android:text="@string/str_btnModuloCatalogo" />
+    <Button
+        android:id="@+id/btnModuloRutina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:backgroundTint="#2F5D9C"
+        android:onClick="onClick"
+        android:text="@string/str_btnModuloRutina" />
+</LinearLayout>
