@@ -15,5 +15,13 @@
     <string name="str_btnActualizarCliente">Actualizar </string>
     <string name="str_btnEliminarCliente">Eliminar</string>
 
+    <string name="str_btnGuardarCategotia">Guardar</string>
+    <string name="str_listarCategoria">listar</string>
+    <string name="str_btnActualizarCategoria">Actualizar </string>
+    <string name="str_btnEliminarCategoria">Eliminar</string>
 
+    <string name="str_btnGuardarEjercicio">Guardar</string>
+    <string name="str_listarEjercicio">listar</string>
+    <string name="str_btnActualizarEjercicio">Actualizar </string>
+    <string name="str_btnEliminarEjercicio">Eliminar</string>
 </resources>

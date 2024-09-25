@@ -7,12 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.personaltrainer.R;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -52,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnModuloCatalogo:
                 Toast.makeText(context, "ListaEjercicio", Toast.LENGTH_LONG).show();
-                Intent i2 = new Intent(context, com.example.personaltrainer.view.Objetivo.ListObjetivoActivity.class);
+                Intent i2 = new Intent(context, com.example.personaltrainer.view.Categoria.ListaCategoriaActivity.class);
                 startActivity(i2);
                 break;
             case R.id.btnModuloRutina:

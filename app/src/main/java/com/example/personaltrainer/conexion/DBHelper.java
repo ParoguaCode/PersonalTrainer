@@ -26,11 +26,6 @@ public class DBHelper extends SQLiteOpenHelper {
         String sqlObjetivo = "CREATE TABLE Objetivo (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT)";
         db.execSQL(sqlObjetivo);
 
-        String CREATE_CATEGORY_TABLE = "CREATE TABLE categoria ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "nombre TEXT)";
-        db.execSQL(CREATE_CATEGORY_TABLE);
-
         // Crear tabla Cliente
         String sqlCliente = "CREATE TABLE Cliente (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -42,7 +37,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "idObjetivo INTEGER, " +
                 "FOREIGN KEY (idObjetivo) REFERENCES Objetivo(id))";
         db.execSQL(sqlCliente);
+
         //Tabla categoria
+        String CREATE_CATEGORY_TABLE = "CREATE TABLE Categoria ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "nombre TEXT)";
+        db.execSQL(CREATE_CATEGORY_TABLE);
+
         //Tabla Ejercicio
 
         //Tabla Rutina
