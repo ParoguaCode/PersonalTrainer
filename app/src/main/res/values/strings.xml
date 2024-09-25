@@ -9,4 +9,11 @@
     <string name="str_listarObjetivo">lista objetivo</string>
     <string name="str_btnActualizarObjetivo">Actualizar </string>
     <string name="str_btnEliminarObjetivo">Eliminar</string>"
+
+    <string name="str_btnGuardarCliente">Guardar</string>
+    <string name="str_listarCliente">listar</string>
+    <string name="str_btnActualizarCliente">Actualizar </string>
+    <string name="str_btnEliminarCliente">Eliminar</string>
+
+
 </resources>

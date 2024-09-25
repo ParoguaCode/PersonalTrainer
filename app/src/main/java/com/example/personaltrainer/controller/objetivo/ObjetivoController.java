@@ -6,88 +6,62 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.personaltrainer.conexion.DBHelper;
+import com.example.personaltrainer.model.Cliente;
 import com.example.personaltrainer.model.Objetivo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObjetivoController implements IObjetivoController {
+public class ObjetivoController {
+    private Context context;
     private DBHelper dbHelper;
-    private SQLiteDatabase db;
 
+    // Constructor
     public ObjetivoController(Context context) {
-        dbHelper = new DBHelper(context);
+        this.context = context;
+        this.dbHelper = new DBHelper(context);
     }
 
     // Método para insertar un objetivo
     public boolean insertarObjetivo(Objetivo objetivo) {
-        db = dbHelper.getWritableDatabase();
-        ContentValues valores = new ContentValues();
-        valores.put("nombre", objetivo.getNombre());
-
-        long resultado = db.insert("Objetivo", null, valores);
+        SQLiteDatabase db = dbHelper.getWritableDatabase(); // Abre la base de datos para escribir
+        ContentValues values = new ContentValues();
+        values.put("nombre", objetivo.getNombre());
+        long resultado = db.insert("objetivo", null, values);
         db.close();
-        return resultado != -1;
+
+        return resultado != -1; // Si el valor de resultado es -1, significa que la inserción falló
     }
 
-    // Método para obtener todos los objetivos
-    public ArrayList<Objetivo> obtenerObjetivos() {
-        ArrayList<Objetivo> listaObjetivos = new ArrayList<>();
-        db = dbHelper.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM Objetivo ORDER BY id DESC", null);
-        if (cursor.moveToFirst()) {
-            do {
-                Objetivo objetivo = new Objetivo();
-                objetivo.setId(cursor.getInt(0));
-                objetivo.setNombre(cursor.getString(1));
-
-                listaObjetivos.add(objetivo);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return listaObjetivos;
-    }
 
     // Método para actualizar un objetivo
     public boolean actualizarObjetivo(Objetivo objetivo) {
-        db = dbHelper.getWritableDatabase();
-        ContentValues valores = new ContentValues();
-        valores.put("nombre", objetivo.getNombre());
-
-        int resultado = db.update("Objetivo", valores, "id = ?", new String[]{String.valueOf(objetivo.getId())});
-        db.close();
-        return resultado > 0;
+        try {
+            objetivo.actualizarObjetivo();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // Método para eliminar un objetivo
     public boolean eliminarObjetivo(int id) {
-        db = dbHelper.getWritableDatabase();
-        int resultado = db.delete("Objetivo", "id = ?", new String[]{String.valueOf(id)});
-        db.close();
-        return resultado > 0;
-    }
-
-    // Método para obtener un objetivo por su id
-    public Objetivo obtenerObjetivoPorId(int id) {
-        db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM Objetivo WHERE id = ?", new String[]{String.valueOf(id)});
-        Objetivo objetivo = null;
-        if (cursor.moveToFirst()) {
-            objetivo = new Objetivo();
-            objetivo.setId(cursor.getInt(0));
-            objetivo.setNombre(cursor.getString(1));
+        try {
+            Objetivo objetivo = new Objetivo(context);
+            objetivo.setId(id);
+            objetivo.eliminarObjetivo();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
-        cursor.close();
-        db.close();
-        return objetivo;
     }
 
-    @Override
-    public Objetivo obtenerObjetivoNombre(String nombre) {
-        return null;
+    // Método para obtener todos los objetivos
+    public ArrayList<Objetivo> obtenerObjetivos() {
+        Objetivo objetivo = new Objetivo(context);
+        return objetivo.obtenerTodosLosObjetivos();
     }
-
 
 }

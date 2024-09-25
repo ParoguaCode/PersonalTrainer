@@ -13,8 +13,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.personaltrainer.R;
 import com.example.personaltrainer.conexion.DBHelper;
+import com.example.personaltrainer.controller.cliente.ClienteController;
 import com.example.personaltrainer.controller.objetivo.ObjetivoController;
+import com.example.personaltrainer.model.Cliente;
 import com.example.personaltrainer.model.Objetivo;
+import com.example.personaltrainer.view.Cliente.ListaClienteActivity;
 
 import java.util.ArrayList;
 
@@ -33,7 +36,7 @@ public class AgregarObjetivoActivity extends AppCompatActivity implements View.O
     }
 
     private void init(){
-        context = getApplicationContext();
+        context = this;
         btnGuadarObjetivo = findViewById(R.id.btnGuadarObjetivo);
         btnActualizarObjetivo = findViewById(R.id.btnActualizarObjetivo);
         btnEliminarObjetivo = findViewById(R.id.btnEliminarObjetivo);
@@ -68,41 +71,104 @@ public class AgregarObjetivoActivity extends AppCompatActivity implements View.O
         objetivo.setNombre(nombre);
         return objetivo;
     }
+    // Método para guardar un nuevo cliente
+    /*private void guardar() {
+        Objetivo objetivo = llenarDatosObjetivo();
+        ObjetivoController objetivoController = new ObjetivoController(context);
 
-    private void guardar() {
-        Objetivo objetivo = llenarDatosObjetivo(); // Supongo que este método llena tu objeto objetivo
-        ObjetivoController objetivoController = new ObjetivoController(context); // Crear una instancia del controlador
-        boolean resultado;
-        if (id == 0) {
-            // Lógica para agregar nuevo objetivo
-            resultado = objetivoController.insertarObjetivo(objetivo);  // Usar el controlador para insertar
-
-            if (resultado) {
-                Toast.makeText(context, "Nuevo objetivo agregado", Toast.LENGTH_LONG).show();
-                // Intentar volver a la lista de objetivos o refrescar la vista
-
-            } else {
-                Toast.makeText(context, "Error al agregar el objetivo", Toast.LENGTH_LONG).show();
-            }
-        } else {
-
-            // Lógica para actualizar un objetivo existente
-            //ant - objetivo.setId(id); // Asegúrate de que el id esté configurado
-            resultado = objetivoController.actualizarObjetivo(objetivo); // Usar el controlador para actualizar
-
-            if (resultado) {
-                Toast.makeText(context, "Objetivo actualizado", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(context, "Error al actualizar el objetivo", Toast.LENGTH_LONG).show();
-            }
-        }
-        // Si el resultado es positivo, redirigir a la actividad de la lista
+        boolean resultado = objetivoController.insertarObjetivo(objetivo);
         if (resultado) {
+            Toast.makeText(context, "Nuevo Objetivo agregado", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(context, ListObjetivoActivity.class);
             startActivity(intent);
             finish(); // Finalizar la actividad actual si es necesario
+        } else {
+            Toast.makeText(context, "Error al agregar el objetivo", Toast.LENGTH_LONG).show();
+        }
+    }*/
+    private void guardar() {
+        String nombreIngresado = txtnombre.getText().toString().trim();
+
+        if (nombreIngresado.isEmpty()) {
+            Toast.makeText(this, "El nombre del objetivo no puede estar vacío", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Objetivo objetivo = new Objetivo();
+        objetivo.setNombre(nombreIngresado);
+
+        ObjetivoController objetivoController = new ObjetivoController(this); // Usar 'this' como contexto
+
+        boolean resultado = objetivoController.insertarObjetivo(objetivo);
+        if (resultado) {
+            Toast.makeText(this, "Nuevo Objetivo agregado", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, ListObjetivoActivity.class);
+            startActivity(intent);
+            finish(); // Finalizar la actividad actual
+        } else {
+            Toast.makeText(this, "Error al agregar el objetivo", Toast.LENGTH_LONG).show();
         }
     }
+
+
+    // Método para actualizar un cliente existente
+    private void actualizar() {
+        Objetivo objetivo = llenarDatosObjetivo();
+        objetivo.setId(id);  // El ID del cliente que estamos actualizando
+
+        ObjetivoController objetivoController = new ObjetivoController(context);
+
+        boolean resultado = objetivoController.actualizarObjetivo(objetivo);
+        if (resultado) {
+            Toast.makeText(context, "Objetivo actualizado", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(context, ListObjetivoActivity.class);
+            startActivity(intent);
+            finish(); // Finalizar la actividad actual si es necesario
+        } else {
+            Toast.makeText(context, "Error al actualizar el cliente", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    //    private void guardar() {
+//        Objetivo objetivo = llenarDatosObjetivo(); // este método llena tu objeto objetivo
+//        ObjetivoController objetivoController = new ObjetivoController(context); // Crear una instancia del controlador
+//        // Verifica que el nombre no esté vacío o nulo
+//        if (objetivo.getNombre() == null || objetivo.getNombre().trim().isEmpty()) {
+//            Toast.makeText(context, "El nombre del objetivo no puede estar vacío", Toast.LENGTH_LONG).show();
+//            return;
+//        }
+//        boolean resultado;
+//        if (id == 0) {
+//            // Lógica para agregar nuevo objetivo
+//            resultado = objetivoController.insertarObjetivo(objetivo);  // Usar el controlador para insertar
+//
+//            if (resultado) {
+//                Toast.makeText(context, "Nuevo objetivo agregado", Toast.LENGTH_LONG).show();
+//                // Intentar volver a la lista de objetivos o refrescar la vista
+//
+//            } else {
+//                Toast.makeText(context, "Error al agregar el objetivo", Toast.LENGTH_LONG).show();
+//            }
+//        } else {
+//
+//            // Lógica para actualizar un objetivo existente
+//            //ant - objetivo.setId(id); // Asegúrate de que el id esté configurado
+//            resultado = objetivoController.actualizarObjetivo(objetivo); // Usar el controlador para actualizar
+//
+//            if (resultado) {
+//                Toast.makeText(context, "Objetivo actualizado", Toast.LENGTH_LONG).show();
+//            } else {
+//                Toast.makeText(context, "Error al actualizar el objetivo", Toast.LENGTH_LONG).show();
+//            }
+//        }
+//        // Si el resultado es positivo, redirigir a la actividad de la lista
+//        if (resultado) {
+//            Intent intent = new Intent(context, ListObjetivoActivity.class);
+//            startActivity(intent);
+//            finish(); // Finalizar la actividad actual si es necesario
+//        }
+//    }
     private void eliminarObjetivo() {
         if (id == 0) {
             Toast.makeText(context, "No es posible eliminar un objetivo sin ID", Toast.LENGTH_LONG).show();
@@ -136,19 +202,6 @@ public class AgregarObjetivoActivity extends AppCompatActivity implements View.O
                 .show();
     }
 
-    /*private void eliminarObjetivo() {
-        Objetivo objetivo = llenarDatosObjetivo(); // Supongo que este método llena tu objeto objetivo
-        ObjetivoController objetivoController = new ObjetivoController(context); // Crear una instancia del controlador
-        if (id == 0) {
-            Toast.makeText(context, "No es posible Eliminar", Toast.LENGTH_LONG).show();
-        } else {
-            objetivoController.eliminarObjetivo(id); // Usar el controlador para actualizar
-            Toast.makeText(context, "Objetivo Eliminado", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(context, ListObjetivoActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }*/
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -156,7 +209,7 @@ public class AgregarObjetivoActivity extends AppCompatActivity implements View.O
                 guardar();
                 break;
             case R.id.btnActualizarObjetivo:
-                guardar();
+                actualizar();
                 break;
             case R.id.btnEliminarObjetivo:
                 eliminarObjetivo();

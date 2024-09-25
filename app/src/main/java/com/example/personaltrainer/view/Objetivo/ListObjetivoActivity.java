@@ -8,23 +8,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.personaltrainer.R;
-import com.example.personaltrainer.conexion.DBHelper;
 import com.example.personaltrainer.controller.objetivo.ObjetivoController;
-import com.example.personaltrainer.controller.objetivo.SelectListenerObjetvo;
 import com.example.personaltrainer.model.Objetivo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListObjetivoActivity extends AppCompatActivity implements SelectListenerObjetvo {
+public class ListObjetivoActivity extends AppCompatActivity {
 
     private FloatingActionButton btnAgregarObjetivo;
     ListView listView;
@@ -64,37 +58,6 @@ public class ListObjetivoActivity extends AppCompatActivity implements SelectLis
         });
     }
 
-    /*private void llenarListView() {
-        nombreObjetivo = new ArrayList<String>();
-        idObjetivos = new ArrayList<Integer>();
-
-        List<Objetivo> listaObjetivo = objetivoController.obtenerObjetivos();
-        for (Objetivo objetivo : listaObjetivo) {
-            nombreObjetivo.add(objetivo.getNombre());
-            idObjetivos.add(objetivo.getId());
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                ListObjetivoActivity.this,
-                android.R.layout.simple_list_item_1,
-                nombreObjetivo
-        );
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Objetivo objetivo = listaObjetivo.get(i); // Corregido
-                Bundle bolsa = new Bundle();
-                bolsa.putInt("id", objetivo.getId());
-                bolsa.putString("nombre", objetivo.getNombre());
-
-                Intent intent = new Intent(ListObjetivoActivity.this, ListObjetivoActivity.class);
-                intent.putExtras(bolsa);
-                startActivity(intent);
-            }
-        });
-    }*/
     private void llenarListView() {
         nombreObjetivo = new ArrayList<String>();
         idObjetivos = new ArrayList<Integer>();
@@ -124,9 +87,5 @@ public class ListObjetivoActivity extends AppCompatActivity implements SelectLis
                 startActivity(intent);
             }
         });
-    }
-        @Override
-    public void onItemClick(String nombre) {
-
     }
 }

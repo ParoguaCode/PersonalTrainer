@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.Cliente.GestionarClienteActivity"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10sp"
+        android:paddingBottom="10sp"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:text="Registrar Cliente"
+        android:textStyle=""
+        android:textColor="@color/white"
+        android:background="@color/Primario"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="15dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Nombre"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtNombre"
+        android:hint="insertar nombre"
+        android:inputType="text"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Telefono"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTelefono"
+        android:hint="insertar numero de celular"
+        android:inputType="text"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="peso"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPeso"
+        android:hint="peso"
+        android:inputType="text"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Altura"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtAltura"
+        android:hint="insertar altura"
+        android:inputType="text"
+        />
+
+    <TextView
+        android:id="@+id/viewImc"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="IMC" />
+    <EditText
+        android:id="@+id/txtIMC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="imc"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="10dp">
+
+        <!-- Texto que indica el objetivo -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Objetivo:"
+            android:textSize="16sp"
+            android:paddingEnd="10dp"/>
+
+        <!-- Spinner para mostrar los objetivos -->
+        <Spinner
+            android:id="@+id/spinnerObjetivos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"/>
+
+        <!-- Botón para agregar nuevo objetivo -->
+        <Button
+            android:id="@+id/btnAgregarObjetivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Añadir"
+            android:backgroundTint="@color/Primario"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+</LinearLayout>
+
+    <Button
+        android:id="@+id/btnGuardarCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/Primario"
+        android:onClick="onClick"
+        android:text="@string/str_btnGuardarCliente"
+        android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/btnActualizarCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/Primario"
+        android:onClick="onClick"
+        android:text="@string/str_btnActualizarCliente"
+        android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/btnEliminarCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/Primario"
+        android:onClick="onClick"
+        android:text="@string/str_btnEliminarCliente"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

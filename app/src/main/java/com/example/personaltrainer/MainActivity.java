@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btnModuloCliente:
                 Toast.makeText(context, "ListaCliente", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(context, com.example.personaltrainer.view.Objetivo.AgregarObjetivoActivity.class);
+                Intent i = new Intent(context, com.example.personaltrainer.view.Cliente.ListaClienteActivity.class);
                 startActivity(i);
                 break;
             case R.id.btnModuloCatalogo:
