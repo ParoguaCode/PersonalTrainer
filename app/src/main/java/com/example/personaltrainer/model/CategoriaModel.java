@@ -43,6 +43,12 @@ public class CategoriaModel {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     public void insertarCategoria(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();

@@ -1,20 +1,12 @@
 package com.example.personaltrainer.conexion;
-
-import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import  android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.personaltrainer.model.Cliente;
-import com.example.personaltrainer.model.Objetivo;
-
-import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "entrenador.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 6;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -39,17 +31,39 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCliente);
 
         //Tabla categoria
-        String CREATE_CATEGORY_TABLE = "CREATE TABLE Categoria ("
+        String sqlCategoria = "CREATE TABLE Categoria ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "nombre TEXT)";
-        db.execSQL(CREATE_CATEGORY_TABLE);
+        db.execSQL(sqlCategoria);
 
         //Tabla Ejercicio
+        String sqlEjercicio = "CREATE TABLE Ejercicio("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "nombre TEXT, "
+                + "descripcion TEXT, "
+                + "imagen TEXT, "
+                + "idCategoria INTEGER, " +
+                "FOREIGN KEY (idCategoria) REFERENCES Categoria(id))";
+        db.execSQL(sqlEjercicio);
 
         //Tabla Rutina
+        String sqlRutina = "CREATE TABLE Rutina ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "tipo TEXT, "
+                +"idCliente INTEGER, " +
+                "FOREIGN KEY (idCliente) REFERENCES Cliente(id))";
+        db.execSQL(sqlRutina);
+
         // Esta es mi tabla intermedia EjercicioRutina
-
-
+        String sqlEjercicioRutina = "CREATE TABLE EjercicioRutina (" +
+                "idEjercicio INTEGER, " +
+                "idRutina INTEGER, " +
+                "repeticion TEXT, " +
+                "PRIMARY KEY (idEjercicio, idRutina), " +  // Clave primaria compuesta
+                "FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(id), " +
+                "FOREIGN KEY (idRutina) REFERENCES Rutina(id)" +
+                ");";
+        db.execSQL(sqlEjercicioRutina);
     }
 
     @Override
@@ -58,7 +72,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Objetivo");
         db.execSQL("DROP TABLE IF EXISTS Cliente");
         db.execSQL("DROP TABLE IF EXISTS Categoria");
+        db.execSQL("DROP TABLE IF EXISTS Ejercicio");
+        db.execSQL("DROP TABLE IF EXISTS Rutina");
+        db.execSQL("DROP TABLE IF EXISTS EjercicioRutina");
         onCreate(db);
+
     }
 }
 

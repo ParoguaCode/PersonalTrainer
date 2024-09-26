@@ -42,18 +42,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btnModuloCliente:
                 Toast.makeText(context, "ListaCliente", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(context, com.example.personaltrainer.view.Cliente.ListaClienteActivity.class);
+               // Intent i = new Intent(context, com.example.personaltrainer.view.Cliente.ListaClienteActivity.class);
+                Intent i = new Intent(context, com.example.personaltrainer.view.Categoria.GestionarCategoriaActivity.class);
+
                 startActivity(i);
                 break;
             case R.id.btnModuloCatalogo:
                 Toast.makeText(context, "ListaEjercicio", Toast.LENGTH_LONG).show();
-                Intent i2 = new Intent(context, com.example.personaltrainer.view.Categoria.ListaCategoriaActivity.class);
+                Intent i2 = new Intent(context, com.example.personaltrainer.view.Ejercicio.ListaEjercicioActivity.class);
                 startActivity(i2);
                 break;
             case R.id.btnModuloRutina:
                 Toast.makeText(context, "ListaRutina", Toast.LENGTH_LONG).show();
-                // Intent i3 = new Intent(context, com.example.entrenadorpersonal.view.cliente.ClienteActivity.class);
-                // startActivity(i3);
+                Intent i3 = new Intent(context, com.example.personaltrainer.view.Ejercicio.GestionarEjercicioActivity.class);
+                 startActivity(i3);
                 break;
         }
     }
