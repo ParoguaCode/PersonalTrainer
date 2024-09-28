@@ -1,26 +1,21 @@
 package com.example.personaltrainer.controller.cliente;
 
 import android.content.Context;
-import com.example.personaltrainer.conexion.DBHelper;
 import com.example.personaltrainer.model.Cliente;
 import java.util.ArrayList;
 
 public class ClienteController {
-    private DBHelper dbHelper;
     private Context context;
 
     // Constructor
     public ClienteController(Context context) {
         this.context = context;
-        this.dbHelper = new DBHelper(context);
     }
-
     // Obtener todos los clientes
     public ArrayList<Cliente> obtenerClientes() {
         Cliente cliente = new Cliente(context);
         return cliente.obtenerTodosLosClientes();
     }
-
     // Insertar un cliente
     public boolean insertarCliente(Cliente cliente) {
         try {

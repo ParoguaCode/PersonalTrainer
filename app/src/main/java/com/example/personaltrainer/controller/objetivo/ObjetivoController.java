@@ -4,9 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.example.personaltrainer.conexion.DBHelper;
-import com.example.personaltrainer.model.Cliente;
 import com.example.personaltrainer.model.Objetivo;
 
 import java.util.ArrayList;

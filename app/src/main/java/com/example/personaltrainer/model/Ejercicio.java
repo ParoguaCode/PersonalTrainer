@@ -76,12 +76,10 @@ public class Ejercicio {
     public Uri getImagenUri() {
         return Uri.parse(imagen);  // Convertir String a Uri
     }
-
     // Establecer la imagen desde un objeto Uri
-    public void setImagenUri(Uri imagenUri) {
-        this.imagen = imagenUri.toString();  // Convertir Uri a String
+    public void setImagenUri(Uri imagen) {
+        this.imagen = imagen.toString();  // Convertir Uri a String
     }
-
     // Obtener la imagen como String
     public String getImagen() {
         return imagen;

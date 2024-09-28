@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,9 +19,7 @@ import com.example.personaltrainer.R;
 import com.example.personaltrainer.controller.CategoriaController;
 import com.example.personaltrainer.controller.EjercicioController;
 import com.example.personaltrainer.model.CategoriaModel;
-import com.example.personaltrainer.model.Cliente;
 import com.example.personaltrainer.model.Ejercicio;
-import com.example.personaltrainer.model.Objetivo;
 
 import java.util.ArrayList;
 
