@@ -1,10 +1,13 @@
 package com.example.personaltrainer.view.Ejercicio;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,27 +16,38 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.personaltrainer.R;
 import com.example.personaltrainer.controller.CategoriaController;
 import com.example.personaltrainer.controller.EjercicioController;
 import com.example.personaltrainer.model.CategoriaModel;
 import com.example.personaltrainer.model.Ejercicio;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class GestionarEjercicioActivity extends AppCompatActivity implements View.OnClickListener {
-    Context context;
-    Spinner spinnerCategoria;
-    Button btnGuardarEjercicio, btnAgregarCategoria, btnActualizarEjercicio, btnEliminarEjercicio, btnSeleccionarImagen;
-    EditText txtNombre, txtDescripcion;
-    ImageView imagen;
+    private static final int REQUEST_CODE = 100;
+    private static final int REQUEST_IMAGE_PICK = 1;
+    private Context context;
+    private Spinner spinnerCategoria;
+    private Button btnGuardarEjercicio, btnAgregarCategoria, btnActualizarEjercicio, btnEliminarEjercicio, btnSeleccionarImagen;
+    private EditText txtNombre, txtDescripcion;
+    private ImageView imagen;
 
-    CategoriaController categoriaController;
-    ArrayList<CategoriaModel> listaCategoria;
-    int id;
-    String rutaImagen; // Variable para almacenar la ruta de la imagen seleccionada
+    private CategoriaController categoriaController;
+    private ArrayList<CategoriaModel> listaCategoria;
+    private int id;
+    private String rutaImagen; // Variable para almacenar la ruta de la imagen seleccionada
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +69,9 @@ public class GestionarEjercicioActivity extends AppCompatActivity implements Vie
         imagen = findViewById(R.id.imagen);
 
         categoriaController = new CategoriaController(this);
-
         cargarCategoriaEnSpinner();
 
+        // Verificar si se están editando los datos de un ejercicio existente
         Intent i = getIntent();
         Bundle bolsa = i.getExtras();
         if (bolsa != null) {
@@ -65,16 +79,38 @@ public class GestionarEjercicioActivity extends AppCompatActivity implements Vie
             String nombre = bolsa.getString("nombre");
             String descripcion = bolsa.getString("descripcion");
             int idCategoriaEjercicio = bolsa.getInt("idCategoria");
+            String imagenUri = bolsa.getString("imagen");
 
+            // Establecer los valores obtenidos
             txtNombre.setText(nombre);
             txtDescripcion.setText(descripcion);
 
+            // Verificar permisos de almacenamiento
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE);
+            }
+
+            // Cargar la imagen con Glide desde la URI si está disponible
+            if (imagenUri != null) {
+                Glide.with(this)
+                        .load(imagenUri)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.ic_launcher_background)
+                        .into(imagen);
+            } else {
+                imagen.setImageResource(R.drawable.ic_launcher_background);
+            }
+
+            // Seleccionar la categoría en el spinner
             for (int j = 0; j < listaCategoria.size(); j++) {
                 if (listaCategoria.get(j).getId() == idCategoriaEjercicio) {
                     spinnerCategoria.setSelection(j);
                     break;
                 }
             }
+
+            // Mostrar los botones de actualización y eliminación
             btnGuardarEjercicio.setVisibility(View.GONE);
             btnActualizarEjercicio.setVisibility(View.VISIBLE);
             btnEliminarEjercicio.setVisibility(View.VISIBLE);
@@ -83,6 +119,7 @@ public class GestionarEjercicioActivity extends AppCompatActivity implements Vie
             btnEliminarEjercicio.setVisibility(View.GONE);
         }
 
+        // Establecer los listeners
         btnAgregarCategoria.setOnClickListener(this);
         btnGuardarEjercicio.setOnClickListener(this);
         btnActualizarEjercicio.setOnClickListener(this);
@@ -103,32 +140,42 @@ public class GestionarEjercicioActivity extends AppCompatActivity implements Vie
 
         String nombre = txtNombre.getText().toString();
         String descripcion = txtDescripcion.getText().toString();
-
         CategoriaModel categoriaSeleccionada = (CategoriaModel) spinnerCategoria.getSelectedItem();
-        int idcategoriaSeleccionada = categoriaSeleccionada.getId();
+        int idCategoriaSeleccionada = categoriaSeleccionada.getId();
 
         ejercicio.setId(id);
         ejercicio.setNombre(nombre);
         ejercicio.setDescripcion(descripcion);
-        ejercicio.setIdCategoria(idcategoriaSeleccionada);
-        ejercicio.setImagen(rutaImagen);  // Establece la imagen seleccionada (si la hay)
+        ejercicio.setIdCategoria(idCategoriaSeleccionada);
+        ejercicio.setImagen(rutaImagen); // Establecer la imagen seleccionada
+
         return ejercicio;
     }
 
     private void seleccionarImagen() {
-        // Abrir la galería para seleccionar una imagen
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, 1);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_IMAGE_PICK);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            Uri selectedImage = data.getData();
-            imagen.setImageURI(selectedImage);
-            rutaImagen = selectedImage.toString();  // Almacena la ruta de la imagen seleccionada
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK && data != null) {
+            Uri imageUri = data.getData();
+            if (imageUri != null) {
+                // Guardar la ruta de la imagen seleccionada
+                rutaImagen = imageUri.toString();
+
+                // Mostrar la imagen seleccionada en el ImageView
+                Glide.with(this)
+                        .load(imageUri)
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .error(R.drawable.ic_launcher_foreground)
+                        .into(imagen);
+            } else {
+                imagen.setImageResource(R.drawable.ic_launcher_foreground);
+            }
         }
     }
 
@@ -194,3 +241,4 @@ public class GestionarEjercicioActivity extends AppCompatActivity implements Vie
         }
     }
 }
+

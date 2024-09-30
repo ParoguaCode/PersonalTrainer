@@ -38,12 +38,16 @@ public class Ejercicio {
         this.idCategoria = idCategoria;
     }
 
-    // Constructor con Uri para la imagen
+    // Constructor con Uri para la imagen (con manejo de null)
     public Ejercicio(int id, String nombre, String descripcion, Uri imagenUri, int idCategoria) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.imagen = imagenUri.toString();  // Convertir Uri a String y almacenarlo
+        if (imagenUri != null) {
+            this.imagen = imagenUri.toString();  // Convertir Uri a String si no es null
+        } else {
+            this.imagen = null;  // O un valor predeterminado si prefieres
+        }
         this.idCategoria = idCategoria;
     }
 
@@ -74,12 +78,21 @@ public class Ejercicio {
 
     // Obtener la URI como objeto Uri
     public Uri getImagenUri() {
-        return Uri.parse(imagen);  // Convertir String a Uri
+        if (imagen != null) {
+            return Uri.parse(imagen);  // Convertir String a Uri
+        }
+        return null;
     }
+
     // Establecer la imagen desde un objeto Uri
-    public void setImagenUri(Uri imagen) {
-        this.imagen = imagen.toString();  // Convertir Uri a String
+    public void setImagenUri(Uri imagenUri) {
+        if (imagenUri != null) {
+            this.imagen = imagenUri.toString();  // Convertir Uri a String
+        } else {
+            this.imagen = null;
+        }
     }
+
     // Obtener la imagen como String
     public String getImagen() {
         return imagen;
@@ -172,11 +185,18 @@ public class Ejercicio {
         if (cursor.moveToFirst()) {
             do {
                 @SuppressLint("Range")
-                Ejercicio ejercicio = new Ejercicio(
+                String imagenString = cursor.getString(cursor.getColumnIndex("imagen"));
+                Uri imagenUri = null;
+
+                if (imagenString != null && !imagenString.isEmpty()) {
+                    imagenUri = Uri.parse(imagenString);
+                }
+
+                @SuppressLint("Range") Ejercicio ejercicio = new Ejercicio(
                         cursor.getInt(cursor.getColumnIndex("id")),
                         cursor.getString(cursor.getColumnIndex("nombre")),
                         cursor.getString(cursor.getColumnIndex("descripcion")),
-                        Uri.parse(cursor.getString(cursor.getColumnIndex("imagen"))),  // Convertir String a Uri
+                        imagenUri,  // Manejar la URI, incluso si es null
                         cursor.getInt(cursor.getColumnIndex("idCategoria"))
                 );
                 listaEjercicios.add(ejercicio);
@@ -188,4 +208,3 @@ public class Ejercicio {
         return listaEjercicios;
     }
 }
-

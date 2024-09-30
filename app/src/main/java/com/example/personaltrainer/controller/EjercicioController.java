@@ -1,9 +1,9 @@
 package com.example.personaltrainer.controller;
 
 import android.content.Context;
+import android.net.Uri;
 
 import com.example.personaltrainer.conexion.DBHelper;
-import com.example.personaltrainer.model.Cliente;
 import com.example.personaltrainer.model.Ejercicio;
 
 import java.util.ArrayList;
@@ -58,4 +58,9 @@ public class EjercicioController {
         Ejercicio ejercicio = new Ejercicio(context);
         return ejercicio.obtenerEjercicioPorId(id);
     }
+    public Uri getImagenUri(){
+        Ejercicio ejercicio = new Ejercicio(context);
+        return ejercicio.getImagenUri();
+    }
+
 }
