@@ -238,6 +238,11 @@ public class GestionarEjercicioActivity extends AppCompatActivity implements Vie
             case R.id.btnSeleccionarImagen:
                 seleccionarImagen();
                 break;
+            case R.id.btnAgregarCategoria:
+                Toast.makeText(context, "Registrar Categoria", Toast.LENGTH_LONG).show();
+                Intent i= new Intent(context, com.example.personaltrainer.view.Categoria.GestionarCategoriaActivity.class);
+                startActivity(i);
+                break;
         }
     }
 }

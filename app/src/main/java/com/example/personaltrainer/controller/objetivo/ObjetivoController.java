@@ -12,22 +12,25 @@ import java.util.List;
 
 public class ObjetivoController {
     private Context context;
+    private DBHelper dbHelper;
 
     // Constructor
     public ObjetivoController(Context context) {
         this.context = context;
+        this.dbHelper = new DBHelper(context);
     }
 
     // Método para insertar un objetivo
     public boolean insertarObjetivo(Objetivo objetivo) {
-        try {
-            objetivo.insertarObjetivo();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();// Capturamos e imprimimos errores
-            return false;
-        }
+        SQLiteDatabase db = dbHelper.getWritableDatabase(); // Abre la base de datos para escribir
+        ContentValues values = new ContentValues();
+        values.put("nombre", objetivo.getNombre());
+        long resultado = db.insert("objetivo", null, values);
+        db.close();
+
+        return resultado != -1; // Si el valor de resultado es -1, significa que la inserción falló
     }
+
 
     // Método para actualizar un objetivo
     public boolean actualizarObjetivo(Objetivo objetivo) {
