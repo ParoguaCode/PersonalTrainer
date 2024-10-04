@@ -7,33 +7,34 @@
     android:layout_height="match_parent"
     tools:context=".view.Categoria.GestionarCategoriaActivity"
     android:orientation="vertical">
-
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:paddingTop="10sp"
         android:paddingBottom="10sp"
-        android:text="Gestionar Categoria"
-        android:textColor="@color/Primario"
+        android:gravity="center"
         android:textSize="24sp"
-        android:textStyle="bold">
-
-    </TextView>
+        android:text="Gestiomar Categoria"
+        android:textStyle=""
+        android:textColor="@color/white"
+        android:background="@color/Primario"
+        />
 
     <TextView
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:text="Nombre"/>
+        android:text="Nombre"
+        android:textStyle="bold"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtNombre"
         android:textSize="20dp"
-        android:hint="insertar nombre"
+        android:hint="Insertar nombre"
         android:inputType="text"
+        android:layout_marginHorizontal="10dp"
         />
     <LinearLayout
         android:layout_width="match_parent"

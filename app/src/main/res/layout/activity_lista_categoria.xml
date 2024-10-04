@@ -15,15 +15,17 @@
         android:gravity="center"
         android:textSize="24sp"
         android:text="Lista Categoria"
-        android:textStyle="bold"
-        android:textColor="@color/Primario"
+        android:textStyle=""
+        android:textColor="@color/white"
+        android:background="@color/Primario"
         />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listaCategorias"
-        android:paddingTop="10dp"
+        android:paddingTop="60dp"
+
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

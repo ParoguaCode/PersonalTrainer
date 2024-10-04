@@ -7,16 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".view.Ejercicio.GestionarEjercicioActivity"
     android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10sp"
+        android:paddingBottom="10sp"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:text="Registrar Ejercicio"
+        android:textStyle=""
+        android:textColor="@color/white"
+        android:background="@color/Primario"
+        />
 
     <!-- Campo para el nombre del ejercicio -->
     <EditText
         android:id="@+id/txtNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre del Ejercicio" />
+        android:hint="Nombre del Ejercicio"
+        android:layout_margin="10dp"/>
 
     <!-- Campo para la descripción -->
     <EditText
+        android:layout_marginHorizontal="10dp"
         android:id="@+id/txtDescripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

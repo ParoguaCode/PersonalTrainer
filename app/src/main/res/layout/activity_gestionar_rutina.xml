@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10sp"
+        android:paddingBottom="10sp"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:text="Gestionar Rutina"
+        android:textStyle=""
+        android:textColor="@color/white"
+        android:background="@color/Primario"
+        />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="60dp">
+
+    <TextView
+        android:id="@+id/lblTipoRutina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de Rutina"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Insertar nombre rutina"/>
+    <!-- Spinner para seleccionar el cliente -->
+    <TextView
+        android:id="@+id/rutinacliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de Cliente"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+    <Spinner
+        android:id="@+id/spinnerTipoRutina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Lista de ejercicios disponibles -->
+    <TextView
+        android:id="@+id/lblEjercicios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccione los ejercicios"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
+    <ListView
+        android:id="@+id/listaEjercicios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:choiceMode="multipleChoice"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"/>
+
+    <!-- Sección para las repeticiones del ejercicio seleccionado -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Repeticiones:"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/txtRepeticiones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_marginLeft="16dp"
+            android:ems="4"/>
+    </LinearLayout>
+
+    <!-- Botón para agregar el ejercicio seleccionado a la rutina -->
+    <Button
+        android:id="@+id/btnAgregarEjercicioARutina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar a Rutina"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Listado de ejercicios agregados a la rutina -->
+    <TextView
+        android:id="@+id/lblEjerciciosRutina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ejercicios en la Rutina"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
+    <ListView
+        android:id="@+id/listaEjerciciosRutina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"/>
+
+    <!-- Botón para guardar la rutina -->
+    <Button
+        android:id="@+id/btnGuardarRutina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Rutina"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>
+
+</RelativeLayout>
