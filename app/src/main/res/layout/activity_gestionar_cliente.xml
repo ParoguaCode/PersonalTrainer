@@ -54,6 +54,19 @@
         android:hint="insertar numero de celular"
         android:inputType="text"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Altura en metro"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtAltura"
+        android:hint="insertar altura en metro ejemplo 1.59"
+        android:inputType="text"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="20dp"
@@ -67,19 +80,6 @@
         android:inputType="text"
         />
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:text="Altura"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtAltura"
-        android:hint="insertar altura"
-        android:inputType="text"
-        />
-
-    <TextView
         android:id="@+id/viewImc"
         android:layout_width="match_parent"
         android:layout_height="20dp"
@@ -89,6 +89,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="imc"
+        />
+    <EditText
+        android:id="@+id/txtSugerencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="objetivo sugerido"
         />
     <LinearLayout
         android:layout_width="match_parent"

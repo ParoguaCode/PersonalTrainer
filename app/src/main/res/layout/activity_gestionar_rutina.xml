@@ -34,6 +34,7 @@
         android:textSize="16sp"
         android:textStyle="bold"/>
     <EditText
+        android:id="@+id/txtNombreRutina"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Insertar nombre rutina"/>
@@ -46,11 +47,12 @@
         android:textSize="16sp"
         android:textStyle="bold"/>
     <Spinner
-        android:id="@+id/spinnerTipoRutina"
+        android:id="@+id/spinnerNombreCliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <!-- Lista de ejercicios disponibles -->
+
     <TextView
         android:id="@+id/lblEjercicios"
         android:layout_width="wrap_content"
@@ -60,13 +62,19 @@
         android:textStyle="bold"
         android:layout_marginTop="16dp"/>
 
-    <ListView
+    <Spinner
+        android:id="@+id/spinnerEjercicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <!--ListView
         android:id="@+id/listaEjercicios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:choiceMode="multipleChoice"
         android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"/>
+        android:dividerHeight="1dp"/-->
 
     <!-- Sección para las repeticiones del ejercicio seleccionado -->
     <LinearLayout
@@ -76,7 +84,6 @@
         android:layout_marginTop="16dp">
 
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Repeticiones:"

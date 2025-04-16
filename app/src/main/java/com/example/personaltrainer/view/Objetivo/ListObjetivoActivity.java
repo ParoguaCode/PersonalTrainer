@@ -11,7 +11,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.personaltrainer.R;
-import com.example.personaltrainer.controller.objetivo.ObjetivoController;
+import com.example.personaltrainer.controller.ObjetivoController;
 import com.example.personaltrainer.model.Objetivo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

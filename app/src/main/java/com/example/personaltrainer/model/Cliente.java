@@ -5,12 +5,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.personaltrainer.conexion.DBHelper;
+import com.example.personaltrainer.proxy.ClienteInterface;
 
 import java.util.ArrayList;
 
-public class Cliente {
+public class Cliente implements ClienteInterface {
     private int id;
     private String nombre;
     private String telefono;
@@ -95,24 +97,32 @@ public class Cliente {
     public void setIdObjetivo(int idObjetivo) {
         this.idObjetivo = idObjetivo;
     }
-
-    // Insertar un cliente en la base de datos
-    public void insertarCliente() {
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    @Override
+    public void insertarCliente(Cliente cliente) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("nombre", this.nombre);
-        values.put("telefono", this.telefono);
-        values.put("peso", this.peso);
-        values.put("altura", this.altura);
-        values.put("imc", this.imc);
-        values.put("idObjetivo", this.idObjetivo);
 
+        // Usamos los valores del objeto cliente
+        values.put("nombre", cliente.getNombre());
+        values.put("telefono", cliente.getTelefono());
+        values.put("peso", cliente.getPeso());
+        values.put("altura", cliente.getAltura());
+        values.put("imc", cliente.getImc());
+        values.put("idObjetivo", cliente.getIdObjetivo());
+
+        // Insertamos los valores en la tabla Cliente
         db.insert("Cliente", null, values);
+
+        // Cerramos la base de datos
         db.close();
     }
 
-    // Actualizar un cliente en la base de datos
-    public void actualizarCliente() {
+    @Override
+    public void actualizarCliente(Cliente cliente) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("nombre", this.nombre);
@@ -126,14 +136,14 @@ public class Cliente {
         db.close();
     }
 
-    // Eliminar un cliente de la base de datos
-    public void eliminarCliente() {
+    @Override
+    public void eliminarCliente(int id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete("Cliente", "id = ?", new String[]{String.valueOf(this.id)});
         db.close();
     }
 
-    // Obtener un cliente por ID
+    @Override
     public Cliente obtenerClientePorId(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM Cliente WHERE id = ?", new String[]{String.valueOf(id)});
@@ -152,19 +162,20 @@ public class Cliente {
             db.close();
             return cliente;
         }
-
         db.close();
         return null;
     }
 
-    // Obtener todos los clientes
+    @Override
     public ArrayList<Cliente> obtenerTodosLosClientes() {
         ArrayList<Cliente> listaClientes = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
+        // Realizar la consulta
         Cursor cursor = db.rawQuery("SELECT * FROM Cliente ORDER BY id DESC", null);
 
-        if (cursor.moveToFirst()) {
+        // Validar si el cursor no es nulo y tiene registros
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 @SuppressLint("Range") Cliente cliente = new Cliente(
                         cursor.getInt(cursor.getColumnIndex("id")),
@@ -177,10 +188,14 @@ public class Cliente {
                 );
                 listaClientes.add(cliente);
             } while (cursor.moveToNext());
+
+            cursor.close(); // Cerrar el cursor si fue exitoso
+        } else {
+            // Log de depuración para tablas vacías
+            Log.d("Cliente", "No se encontraron clientes en la base de datos.");
         }
 
-        cursor.close();
-        db.close();
+        db.close(); // Cerrar la conexión a la base de datos
         return listaClientes;
     }
 }

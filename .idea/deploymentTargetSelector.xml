@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="personal trainer">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-04T02:01:12.010644200Z">
+        <DropdownSelection timestamp="2024-11-24T15:30:01.386178300Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\USUARIO\.android\avd\Medium_Phone_API_35.avd" />

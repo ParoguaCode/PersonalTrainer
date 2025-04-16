@@ -11,8 +11,8 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.personaltrainer.R;
-import com.example.personaltrainer.controller.cliente.ClienteController;
 
+import com.example.personaltrainer.controller.ClienteControllerProxy;
 import com.example.personaltrainer.model.Cliente;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -25,14 +25,14 @@ public class ListaClienteActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> nombreCliente;
     ArrayList<Integer> idClientes;
-    ClienteController clienteController;
+    ClienteControllerProxy clienteControllerProxy;
     Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_cliente);
-        clienteController = new ClienteController(this);
+        clienteControllerProxy = new ClienteControllerProxy(this);
         init();
     }
 
@@ -55,7 +55,7 @@ public class ListaClienteActivity extends AppCompatActivity {
         nombreCliente = new ArrayList<>();
         idClientes = new ArrayList<>();
 
-        List<Cliente> listaCliente = clienteController.obtenerClientes();
+        List<Cliente> listaCliente = clienteControllerProxy.obtenerTodosLosClientes();
         for (Cliente cliente : listaCliente) {
             nombreCliente.add(cliente.getNombre());
             idClientes.add(cliente.getId());

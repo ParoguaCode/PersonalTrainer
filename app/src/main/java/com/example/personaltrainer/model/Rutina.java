@@ -12,9 +12,8 @@ import java.util.ArrayList;
 
 public class Rutina {
     private int id;
-    private String nombre;
-    private String descripcion;
-    private int idUsuario; // Llave foránea que conecta a un usuario
+    private String tipo;
+    private int idCliente; // Llave foránea que conecta a un cliente
     private DBHelper dbHelper;
 
     // Constructor vacío
@@ -26,11 +25,10 @@ public class Rutina {
     }
 
     // Constructor con todos los parámetros
-    public Rutina(int id, String nombre, String descripcion, int idUsuario) {
+    public Rutina(int id, String tipo, int idCliente) {
         this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.idUsuario = idUsuario;
+        this.tipo = tipo;
+        this.idCliente = idCliente;
     }
 
     // Getters y Setters
@@ -43,48 +41,38 @@ public class Rutina {
     }
 
     public String getNombre() {
-        return nombre;
+        return tipo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String tipo) {
+        this.tipo = tipo;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     // Insertar una rutina en la base de datos
-    public void insertarRutina() {
+    public boolean insertarRutina() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("nombre", this.nombre);
-        values.put("descripcion", this.descripcion);
-        values.put("idUsuario", this.idUsuario);
+        ContentValues valores = new ContentValues();
+        valores.put("tipo", this.tipo); // Ajusta los campos según tu modelo
+        valores.put("idCliente", this.idCliente);
 
-        db.insert("Rutina", null, values);
-        db.close();
+        long resultado = db.insert("Rutina", null, valores);
+        return resultado != -1; // Devuelve true si se insertó correctamente
     }
 
     // Actualizar una rutina en la base de datos
     public void actualizarRutina() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("nombre", this.nombre);
-        values.put("descripcion", this.descripcion);
-        values.put("idUsuario", this.idUsuario);
+        values.put("tipo", this.tipo);
+        values.put("idCliente", this.idCliente);
 
         db.update("Rutina", values, "id = ?", new String[]{String.valueOf(this.id)});
         db.close();
@@ -105,9 +93,8 @@ public class Rutina {
         if (cursor != null && cursor.moveToFirst()) {
             @SuppressLint("Range") Rutina rutina = new Rutina(
                     cursor.getInt(cursor.getColumnIndex("id")),
-                    cursor.getString(cursor.getColumnIndex("nombre")),
-                    cursor.getString(cursor.getColumnIndex("descripcion")),
-                    cursor.getInt(cursor.getColumnIndex("idUsuario"))
+                    cursor.getString(cursor.getColumnIndex("tipo")),
+                    cursor.getInt(cursor.getColumnIndex("idCliente"))
             );
             cursor.close();
             db.close();
@@ -129,9 +116,8 @@ public class Rutina {
             do {
                 @SuppressLint("Range") Rutina rutina = new Rutina(
                         cursor.getInt(cursor.getColumnIndex("id")),
-                        cursor.getString(cursor.getColumnIndex("nombre")),
-                        cursor.getString(cursor.getColumnIndex("descripcion")),
-                        cursor.getInt(cursor.getColumnIndex("idUsuario"))
+                        cursor.getString(cursor.getColumnIndex("tipo")),
+                        cursor.getInt(cursor.getColumnIndex("idCliente"))
                 );
                 listaRutinas.add(rutina);
             } while (cursor.moveToNext());

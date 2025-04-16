@@ -12,14 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.personaltrainer.R;
-import com.example.personaltrainer.conexion.DBHelper;
-import com.example.personaltrainer.controller.cliente.ClienteController;
-import com.example.personaltrainer.controller.objetivo.ObjetivoController;
-import com.example.personaltrainer.model.Cliente;
+import com.example.personaltrainer.controller.ObjetivoController;
 import com.example.personaltrainer.model.Objetivo;
-import com.example.personaltrainer.view.Cliente.ListaClienteActivity;
-
-import java.util.ArrayList;
 
 public class AgregarObjetivoActivity extends AppCompatActivity implements View.OnClickListener {
     Context context;

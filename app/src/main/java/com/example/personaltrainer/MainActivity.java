@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnModuloRutina:
                 Toast.makeText(context, "ListaRutina", Toast.LENGTH_LONG).show();
-                Intent i3 = new Intent(context, com.example.personaltrainer.view.Rutina.GestionarRutinaActivity.class);
+                Intent i3 = new Intent(context, com.example.personaltrainer.view.Rutina.ListaRutinasActivity.class);
                  startActivity(i3);
                 break;
         }
